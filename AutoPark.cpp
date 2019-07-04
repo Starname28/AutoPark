@@ -6,15 +6,65 @@
 
 class Car
 {
-public:
 	int speed;
 	std::string number;
 	std::string mark;
 	int engineVolume;
 	int fuel;
-
+public:
+	
 	Car(const int& speed, const std::string& number, const std::string& mark, const int& engineVolume, const int& fuel):
 		speed(speed), number(number), mark(mark), engineVolume(engineVolume), fuel(fuel){}
+	
+	int getSpeed()const
+	{
+		return speed;
+	}
+
+	void setSpeed(const int& speed)
+	{
+		this->speed = speed;
+	}
+
+	std::string getNumber()const
+	{
+		return number;
+	}
+
+	void setNumber(const std::string& number)
+	{
+		this->number = number;
+	}
+
+	std::string getMark()const
+	{
+		return mark;
+	}
+
+	void setMark(const std::string& mark)
+	{
+		this->mark = mark;
+	}
+
+	int getEngineVolume()const
+	{
+		return engineVolume;
+	}
+
+	void setEngineVolume(const int& engineVolume)
+	{
+		this->engineVolume = engineVolume;
+	}
+
+	int getFuel()const
+	{
+		return fuel;
+	}
+
+	void setFuel(const int& fuel)
+	{
+		this->fuel = fuel;
+	}
 
 	bool operator== (Car& car);
 };
@@ -39,7 +89,7 @@ public:
 	}
 	void addCar(Car* car)
 	{
-		if (car->fuel == 0)
+		if (car->getFuel() == 0)
 		{
 			Garage.push_back(car);
 			return;
@@ -52,7 +102,7 @@ public:
 		for (auto& car : Garage)
 		{
 			int i = 0;
-			if (car->number == number)
+			if (car->getNumber() == number)
 			{
 				Garage.erase(Garage.begin() + i);
 				return;
@@ -68,9 +118,9 @@ public:
 	{
 		for (auto& car : Garage)
 		{
-			if (car->number == number)
+			if (car->getNumber() == number)
 			{
-				car->fuel = fuel;
+				car->setFuel(fuel);
 			}
 		}
 		std::cout << " There are not car" << std::endl;
@@ -82,7 +132,7 @@ public:
 		{
 			if (*Auto == car)
 			{
-				std::cout << "Mark: " << Auto->mark << "; " << "Number: " << Auto->number << "; " << "Volume: " << Auto->engineVolume << "; " << "Fuel: " << Auto->fuel << "; " << "Speed: " << Auto->speed << ";\n";
+				std::cout << "Mark: " << Auto->getMark() << "; " << "Number: " << Auto->getNumber() << "; " << "Volume: " << Auto->getEngineVolume() << "; " << "Fuel: " << Auto->getFuel() << "; " << "Speed: " << Auto->getSpeed() << ";\n";
 				return;
 			}
 			
@@ -94,7 +144,7 @@ public:
 	{
 		for (auto& Auto : Garage)
 		{
-				std::cout << "Mark: " << Auto->mark << "; " << "Number: " << Auto->number << "; " << "Volume: " << Auto->engineVolume << "; " << "Fuel: " << Auto->fuel << "; " << "Speed: " << Auto->speed << ";\n";
+			std::cout << "Mark: " << Auto->getMark() << "; " << "Number: " << Auto->getNumber() << "; " << "Volume: " << Auto->getEngineVolume() << "; " << "Fuel: " << Auto->getFuel() << "; " << "Speed: " << Auto->getSpeed() << ";\n";
 		}
 	}
 
@@ -105,7 +155,7 @@ public:
 
 		for (const auto& Auto : Garage)
 		{
-			if (distance == (Auto->fuel / Auto->engineVolume))
+			if (distance == (Auto->getFuel() / Auto->getEngineVolume()))
 			{
 				park->addCar(Auto);
 				return park;
