@@ -1,3 +1,19 @@
 ﻿  AutoPark.cpp
-  AutoPark.vcxproj -> F:\Cod\AutoPark\Debug\AutoPark.exe
-  AutoPark.vcxproj -> F:\Cod\AutoPark\Debug\AutoPark.pdb (Full PDB)
+f:\cod\autopark\autopark\autopark.cpp(106): error C2597: недопустимая ссылка на нестатический член "AutoPark::Garage"
+f:\cod\autopark\autopark\autopark.cpp(106): error C3535: нельзя вывести тип для "auto &&" из "unknown"
+f:\cod\autopark\autopark\autopark.cpp(106): error C2440: инициализация: невозможно преобразовать "unknown" в "int &&"
+  f:\cod\autopark\autopark\autopark.cpp(106): note: Причина: невозможно преобразовать "unknown" в "int"
+  f:\cod\autopark\autopark\autopark.cpp(106): note: Не существует контекста, в котором такое преобразование возможно
+f:\cod\autopark\autopark\autopark.cpp(106): error C2228: выражение слева от ".begin" должно представлять класс, структуру или объединение
+  f:\cod\autopark\autopark\autopark.cpp(106): note: тип: int
+f:\cod\autopark\autopark\autopark.cpp(106): error C2228: выражение слева от ".end" должно представлять класс, структуру или объединение
+  f:\cod\autopark\autopark\autopark.cpp(106): note: тип: int
+f:\cod\autopark\autopark\autopark.cpp(106): error C3536: <begin>$L0: не может использоваться до инициализации
+f:\cod\autopark\autopark\autopark.cpp(106): error C3536: <end>$L0: не может использоваться до инициализации
+f:\cod\autopark\autopark\autopark.cpp(106): error C2100: недопустимое косвенное обращение
+f:\cod\autopark\autopark\autopark.cpp(108): error C2227: выражение слева от "->fuel" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+  f:\cod\autopark\autopark\autopark.cpp(108): note: тип: const int
+f:\cod\autopark\autopark\autopark.cpp(108): error C2227: выражение слева от "->engineVolume" должно указывать на тип класса, структуры или объединения либо на универсальный тип
+  f:\cod\autopark\autopark\autopark.cpp(108): note: тип: const int
+f:\cod\autopark\autopark\autopark.cpp(110): error C2664: "void AutoPark::addCar(Car *)": невозможно преобразовать аргумент 1 из "const int" в "Car *"
+  f:\cod\autopark\autopark\autopark.cpp(110): note: Для преобразования из целого типа в указатель требуется reinterpret_cast, приведение в стиле С или приведение в стиле функции

@@ -13,14 +13,8 @@ public:
 	int engineVolume;
 	int fuel;
 
-	Car(int speed, std::string number, std::string mark, int engineVolume, int fuel)
-	{
-		this->speed = speed;
-		this->number = number;
-		this->mark = mark;
-		this->engineVolume = engineVolume;
-		this->fuel = fuel;
-	}
+	Car(const int& speed, const std::string& number, const std::string& mark, const int& engineVolume, const int& fuel):
+		speed(speed), number(number), mark(mark), engineVolume(engineVolume), fuel(fuel){}
 
 	bool operator== (Car& car);
 };
@@ -33,90 +27,92 @@ bool Car::operator==(Car& car)
 
 class AutoPark
 {
+    static std::vector <Car*> Garage;
 public:
-
-	std::vector <Car> Garage;
-
-	void addCar(Car car)
+	~AutoPark()
 	{
-		if (car.fuel == 0)
+		for (Car* car : Garage)
 		{
-			Garage.push_back(car);
+			delete car;
+			car = nullptr;
 		}
 	}
+	void addCar(Car* car)
+	{
+		if (car->fuel == 0)
+		{
+			Garage.push_back(car);
+			return;
+		}
+		std::cout << "Car is not empty" << std::endl;
+	}
 
-	void removeCar(std::string number)
+	void removeCar(const std::string& number)
 	{
 		for (auto& car : Garage)
 		{
 			int i = 0;
-			int count = 0;
-
-			if (car.number == number)
+			if (car->number == number)
 			{
 				Garage.erase(Garage.begin() + i);
-				count++;
+				return;
 			}
-			else if (i == Garage.size() && count == 0)
-			{
-				std::cout << "There are no car" << std::endl;
-			}
+			
 			i++;
 		}
+
+		std::cout << "There is not car" << std::endl;
 	}
 
-	void fuelCar(std::string number, int fuel)
+	void fuelCar(const std::string& number,const int& fuel)
 	{
-		int i = 0;
-		int count = 0;
-
 		for (auto& car : Garage)
 		{
-			if (car.number == number)
+			if (car->number == number)
 			{
-				car.fuel = fuel;
-				i++;
-			}
-			else if (Garage.size()== count && i == 0)
-			{
-				std::cout << "There are no car" << std::endl;
+				car->fuel = fuel;
 			}
 		}
+		std::cout << " There are not car" << std::endl;
 	}
 
 	void carInfo(Car& car)
 	{
 		for (auto& Auto : Garage)
 		{
-			int i = 0;
-			int count = 0;
+			if (*Auto == car)
+			{
+				std::cout << "Mark: " << Auto->mark << "; " << "Number: " << Auto->number << "; " << "Volume: " << Auto->engineVolume << "; " << "Fuel: " << Auto->fuel << "; " << "Speed: " << Auto->speed << ";\n";
+				return;
+			}
+			
+		}
+		std::cout << " There are not car" << std::endl;
+	}
 
-			if (Auto == car)
-			{
-				std::cout << "Mark: " << Auto.mark << "; " << "Number: " << Auto.number << "; " << "Volume: " << Auto.engineVolume << "; " << "Fuel: " << Auto.fuel << "; " << "Speed: " << Auto.speed << ";\n";
-				i++;
-			}
-			else if(Garage.size()== count && i == 0)
-			{
-				std::cout << "There are no car" << std::endl;
-			}
+	void printInfo()
+	{
+		for (auto& Auto : Garage)
+		{
+				std::cout << "Mark: " << Auto->mark << "; " << "Number: " << Auto->number << "; " << "Volume: " << Auto->engineVolume << "; " << "Fuel: " << Auto->fuel << "; " << "Speed: " << Auto->speed << ";\n";
 		}
 	}
 
-	Car* getCar(int distance)
+	static AutoPark* createAutoPark(const int& distance)
 	{
-		Car* car = nullptr;
+		
+		AutoPark* park = new AutoPark;
 
-		for (auto& Auto : Garage)
+		for (const auto& Auto : Garage)
 		{
-			if (distance == (Auto.fuel / Auto.engineVolume))
+			if (distance == (Auto->fuel / Auto->engineVolume))
 			{
-				car = &Auto;
-				return car;
+				park->addCar(Auto);
+				return park;
 			}
 			else
 			{
-				return car;
+				return nullptr;
 			}
 		}
 	}
@@ -124,20 +120,14 @@ public:
 
 int main()
 {
-	Car one(80, "AT 12", "BMW", 2, 0);
-	Car Two(90, "NB 22", "Mers", 2, 0);
+//	Car one(80, "AT 12", "BMW", 2, 0);
+//	Car Two(90, "NB 22", "Mers", 2, 0);
 
-	AutoPark Garage;
 
-	Garage.addCar(one);
-	Garage.fuelCar("AT 12", 80);
-
-	Garage.addCar(Two);
-	//Garage.fuelCar("NB 22", 0);
-
-	Garage.carInfo(Two);
-	Garage.fuelCar("NB 22", 10);
-	Garage.carInfo(Two);
+	AutoPark* park = AutoPark::createAutoPark(10);
+	//park->addCar(&one);
+	park->printInfo();
+	delete park;
 	system("pause");
 	return 0;
 }
